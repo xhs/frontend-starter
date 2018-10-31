@@ -39,6 +39,7 @@
     "@babel/polyfill": "^7.0.0",
     "knockout": "^3.4.2",
     "axios": "^0.18.0",
-    "date-fns": "^1.29.0"
+    "date-fns": "^1.29.0",
+    "toastr": "^2.1.4"
   }
 }
