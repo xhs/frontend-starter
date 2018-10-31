@@ -7,8 +7,6 @@ const PurgecssPlugin = require('purgecss-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const devMode = process.env.NODE_ENV !== 'production'
-
 module.exports = {
   entry: './src/index.js',
   mode: process.env.NODE_ENV,
@@ -33,7 +31,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           { loader: 'css-loader', options: { importLoaders: 2 } },
           'postcss-loader',
           'sass-loader'
@@ -44,8 +42,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist'], { verbose: true }),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css'
     }),
     new PurgecssPlugin({
       paths: () => glob.sync([
