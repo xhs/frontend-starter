@@ -57,11 +57,9 @@ module.exports = {
     }),
     new PurgecssPlugin({
       paths: () => glob.sync([
-        path.join(__dirname, './src/index.js'),
-        path.join(__dirname, './src/style.css'),
-        path.join(__dirname, './src/index.html'),
-        path.join(__dirname, './src/components/*.js'),
-        path.join(__dirname, './src/templates/*.html')
+        path.join(__dirname, './src/**/*.js'),
+        path.join(__dirname, './src/**/*.html'),
+        path.join(__dirname, './src/**/*.scss')
       ])
     }),
     new HtmlWebpackPlugin({

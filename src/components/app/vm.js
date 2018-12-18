@@ -1,7 +1,6 @@
 import ko from 'knockout'
 import { connect } from 'knockout-store'
 import format from 'date-fns/format'
-import appTemplate from '../templates/app.html'
 
 class AppViewModel {
   constructor(params) {
@@ -25,7 +24,4 @@ function mapStateToParams({ currentTime }) {
   return { currentTime }
 }
 
-ko.components.register('app', {
-  viewModel: connect(mapStateToParams)(AppViewModel),
-  template: appTemplate
-})
+export default connect(mapStateToParams)(AppViewModel)
