@@ -1,12 +1,13 @@
 import ko from 'knockout'
+import { connect } from 'knockout-store'
 import format from 'date-fns/format'
 import appTemplate from '../templates/app.html'
 
 class AppViewModel {
-  constructor() {
+  constructor(params) {
     const self = this
 
-    self.currentTime = ko.observable('')
+    self.currentTime = params.currentTime
     self.message = ko.computed(() => {
       return `Now is ${self.currentTime()}`
     })
@@ -15,15 +16,16 @@ class AppViewModel {
       self.currentTime(format(new Date(), 'HH:mm:ss'))
     }
 
-    self.initialize = async function (_params) {
-      self.updateTime()
-      setInterval(self.updateTime, 1000)
-    }
-    self.initialize()
+    self.updateTime()
+    setInterval(self.updateTime, 1000)
   }
 }
 
+function mapStateToParams({ currentTime }) {
+  return { currentTime }
+}
+
 ko.components.register('app', {
-  viewModel: AppViewModel,
+  viewModel: connect(mapStateToParams)(AppViewModel),
   template: appTemplate
 })
