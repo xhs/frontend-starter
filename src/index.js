@@ -1,12 +1,8 @@
 import '@babel/polyfill'
-import ko from 'knockout'
-import page from 'page'
 import './style.css'
 import './state.js'
-import './components/app'
+import router from './router.js'
+import app from './components/app'
 
-page('*', () => {
-  ko.applyBindings({}, document.getElementById('app'))
-})
-
-page.start()
+router.route('*', app)
+router.start()
